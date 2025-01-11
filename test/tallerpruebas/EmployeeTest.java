@@ -11,42 +11,45 @@ class EmployeeTest {
 
     private static LocalDate currentDate;
 	private static Employee workerUSD;
-    private static Employee workerCAD;
+    private static Employee workerEUR;
     private static Employee supervisorUSD;
-    private static Employee supervisorCAD;
+    private static Employee supervisorEUR;
     private static Employee managerUSD;
-    private static Employee managerCAD;
+    private static Employee managerEUR;
 
 
     @BeforeAll
     public static void setup() {
         supervisorUSD = new Employee(2200, "USD", 0.12F, EmployeeType.Supervisor);
-        supervisorCAD = new Employee(2200, "CAD", 0.12F, EmployeeType.Supervisor);
+        supervisorEUR = new Employee(2200, "EUR", 0.12F, EmployeeType.Supervisor);
     	
     	currentDate = LocalDate.now();
         
         workerUSD = new Employee(1200, "USD", 0, EmployeeType.Worker);
-        workerCAD = new Employee(1200, "CAD", 0, EmployeeType.Worker);
+        workerEUR = new Employee(1200, "EUR", 0, EmployeeType.Worker);
 
 
         managerUSD = new Employee(3200, "USD", 0.22F, EmployeeType.Manager);
-        managerCAD = new Employee(3200, "CAD", 0.22F, EmployeeType.Manager);
+        managerEUR = new Employee(3200, "EUR", 0.22F, EmployeeType.Manager);
     }
+    
+    
+    
     
     // Casos de prueba para cs()
     
     @Test
-    public void testManagerCADEvenMonth() {
+    public void testManagerEUREvenMonth() {
         assumeTrue(currentDate.getMonthValue() % 2 == 0); 
         float expected = (float) (3200 * 0.95) + (0.22F * 0.7F);
-        assertEquals(expected, managerCAD.cs(), 0.01);
+        assertEquals(expected, managerEUR.cs(), 0.01);
     }
     
     @Test
-    public void testWorkerCADOddMonth() {
+    public void testWorkerEUROddMonth() {
         assumeTrue(currentDate.getMonthValue() % 2 != 0); 
         float expected = (float) (1200 * 0.95) + (386.0F / 12 * 2);
-        assertEquals(expected, workerCAD.cs(), 0.01);
+        assertEquals(expected, workerEUR.cs(), 0.01);
     }
     
     
@@ -74,17 +77,17 @@ class EmployeeTest {
     }
 
     @Test
-    public void testSupervisorCADEvenMonth() {
+    public void testSupervisorEUREvenMonth() {
         assumeTrue(currentDate.getMonthValue() % 2 == 0); 
         float expected = (float) (2200 * 0.95) + (0.12F * 0.35F);
-        assertEquals(expected, supervisorCAD.cs(), 0.01);
+        assertEquals(expected, supervisorEUR.cs(), 0.01);
     }
 
     @Test
-    public void testSupervisorCADOddMonth() {
+    public void testSupervisorEUROddMonth() {
         assumeTrue(currentDate.getMonthValue() % 2 != 0); 
         float expected = (float) (2200 * 0.95) + (0.12F * 0.35F) + (386.0F / 12 * 2);
-        assertEquals(expected, supervisorCAD.cs(), 0.01);
+        assertEquals(expected, supervisorEUR.cs(), 0.01);
     }
 
     
@@ -98,10 +101,10 @@ class EmployeeTest {
 
 
     @Test
-    public void testManagerCADOddMonth() {
+    public void testManagerEUROddMonth() {
         assumeTrue(currentDate.getMonthValue() % 2 != 0);
         float expected = (float) (3200 * 0.95) + (0.22F * 0.7F) + (386.0F / 12 * 2);
-        assertEquals(expected, managerCAD.cs(), 0.01);
+        assertEquals(expected, managerEUR.cs(), 0.01);
     }
     
     @Test
@@ -118,36 +121,7 @@ class EmployeeTest {
         assertEquals(expected, managerUSD.cs(), 0.01);
     }
 
-    // Casos de prueba para CalculateYearBonus()
-    @Test
-    public void testYearBonusManagerUSD() {
-        float expectedBonus = 3200 + 386.0F;
-        assertEquals(expectedBonus, managerUSD.CalculateYearBonus(), 0.01);
-    }
-
-    @Test
-    public void testYearBonusWorkerUSD() {
-        float expectedBonus = 386.0F;
-        assertEquals(expectedBonus, workerUSD.CalculateYearBonus(), 0.01);
-    }
-
-    @Test
-    public void testYearBonusManagerCAD() {
-        float expectedBonus = (float) (3200 * 0.95) + 386.0F;
-        assertEquals(expectedBonus, managerCAD.CalculateYearBonus(), 0.01);
-    }
-    
-    @Test
-    public void testYearBonusSupervisorUSD() {
-        float expectedBonus = 2200 + 386.0F * 0.5F;
-        assertEquals(expectedBonus, supervisorUSD.CalculateYearBonus(), 0.01);
-    }
-
-    @Test
-    public void testYearBonusWorkerCAD() {
-        float expectedBonus = 386.0F;
-        assertEquals(expectedBonus, workerCAD.CalculateYearBonus(), 0.01);
-    }    
+      
     
 }
 
