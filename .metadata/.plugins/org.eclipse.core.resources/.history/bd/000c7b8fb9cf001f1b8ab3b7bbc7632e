@@ -1,0 +1,65 @@
+package test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class TestSeccionB {
+
+	package tallerpruebas;
+
+	import org.junit.jupiter.api.Test;
+	import static org.junit.jupiter.api.Assertions.assertEquals;
+
+	class EmployeeTest {
+
+	    @Test
+	    void testCS_Worker_USD_OddMonth() {
+	        Employee employee = new Employee(1000, "USD", 0.1f, EmployeeType.Worker);
+	        float expected = 1000 + (386.0f / 12 * 2); // Salario + décimo
+	        assertEquals(expected, employee.cs(), 0.01f);
+	    }
+
+	    @Test
+	    void testCS_Worker_USD_EvenMonth() {
+	        Employee employee = new Employee(1000, "USD", 0.1f, EmployeeType.Worker);
+	        float expected = 1000; // Salario sin décimo
+	        assertEquals(expected, employee.cs(), 0.01f);
+	    }
+
+	    @Test
+	    void testCS_Supervisor_OtherCurrency_OddMonth() {
+	        Employee employee = new Employee(1000, "EUR", 0.1f, EmployeeType.Supervisor);
+	        float expected = (1000 * 0.95f) + (0.1f * 0.35f) + (386.0f / 12 * 2);
+	        assertEquals(expected, employee.cs(), 0.01f);
+	    }
+
+	    @Test
+	    void testCS_Manager_USD_EvenMonth() {
+	        Employee employee = new Employee(2000, "USD", 0.2f, EmployeeType.Manager);
+	        float expected = 2000 + (0.2f * 0.7f);
+	        assertEquals(expected, employee.cs(), 0.01f);
+	    }
+
+	    @Test
+	    void testCalculateYearBonus_Worker_USD() {
+	        Employee employee = new Employee(1000, "USD", 0.1f, EmployeeType.Worker);
+	        float expected = 386.0f; // Solo RMU
+	        assertEquals(expected, employee.CalculateYearBonus(), 0.01f);
+	    }
+
+	    @Test
+	    void testCalculateYearBonus_Supervisor_OtherCurrency() {
+	        Employee employee = new Employee(1000, "EUR", 0.1f, EmployeeType.Supervisor);
+	        float expected = (1000 * 0.95f) + (386.0f * 0.5f);
+	        assertEquals(expected, employee.CalculateYearBonus(), 0.01f);
+	    }
+
+	    @Test
+	    void testCalculateYearBonus_Manager_USD() {
+	        Employee employee = new Employee(3000, "USD", 0.2f, EmployeeType.Manager);
+	        float expected = 3000 + (386.0f * 1.0f); // Salario + RMU completo
+	        assertEquals(expected, employee.CalculateYearBonus(), 0.01f);
+	    }
+	}
+
