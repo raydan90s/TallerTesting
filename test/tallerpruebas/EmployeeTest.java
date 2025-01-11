@@ -147,10 +147,7 @@ class EmployeeTest {
     public void testYearBonusWorkerCAD() {
         float expectedBonus = 386.0F;
         assertEquals(expectedBonus, workerCAD.CalculateYearBonus(), 0.01);
-    }
-
-    
-
+    }    
     
 }
 
