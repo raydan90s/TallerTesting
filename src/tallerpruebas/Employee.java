@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package tallerpruebas;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -147,5 +146,4 @@ public class Employee
         }
         return 0.0F;
     }
->>>>>>> 6e2d188c4bb711a177b0e13a36ae33dfa3e82c5c
 }
